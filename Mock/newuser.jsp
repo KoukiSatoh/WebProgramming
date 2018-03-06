@@ -112,6 +112,7 @@
     </body>
   </html>
 
+
   <div style="margin-left:35%;margin-right:55%;">
     <a href="UserListServlet">戻る</a>
   </div>
