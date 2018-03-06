@@ -111,20 +111,20 @@ public class UserDao {
         }
     }
 
-   /*IDとユーザ名と生年月日と更新日時を受け取り、ユーザ情報を更新する
+   /*IDとユーザ名と生年月日とを受け取り、ユーザ情報を更新する
     * @param name ユーザ名
     * @param password  パスワード
-    * @param birthDate 生年月日
+x    * @param birthDate 生年月日
     * @param id ID
     */
-    public static void findByUpdate(String password,String name,String birthDate, String id ) {//更新
+    public void findByUpdate(String password,String name,String birthDate, String id ) {//更新
         Connection conn = null;
         try {
             // データベースへ接続
             conn = DBManager.getConnection();
 
             // UPDATE文を準備
-            String sql = "UPDATE user SET  password = ?, name = ?, birthDate = ? WHERE id = ? ";
+            String sql = "UPDATE user SET  password = ?, name = ?, birth_Date = ? WHERE id = ? ";
 
              // UPDATEを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -134,7 +134,7 @@ public class UserDao {
             pStmt.setString(4, id);
 
             // UPDATEを実行
-            int result = pStmt.executeUpdate();
+            pStmt.executeUpdate();
 
 
 
@@ -159,7 +159,7 @@ public class UserDao {
      * @birth_date　生年月日
      *
      * */
-    public static void findByEncrypt(String id, String passConf, String name, String birthDate) {
+    public void findByEncrypt(String id, String passConf, String name, String birthDate1) {
     	   Connection conn = null;
            try {
                // データベースへ接続
@@ -172,7 +172,7 @@ public class UserDao {
                PreparedStatement pStmt = conn.prepareStatement(sql);
                pStmt.setString(1, passConf );
                pStmt.setString(2, name);
-               pStmt.setString(3, birthDate);
+               pStmt.setString(3, birthDate1);
                pStmt.setString(4, id);
 
                // UPDATEを実行
@@ -218,7 +218,7 @@ public class UserDao {
              int idDate = rs.getInt("id");
              String loginIdData = rs.getString("login_id");
              String name = rs.getString("name");
-             Date birthDate = rs.getDate("birth_date");
+             Date birthDate = rs.getDate("birth_Date");
              String password = rs.getString("password");
              String createDate = rs.getString("create_date");
              String updateDate = rs.getString("update_date");

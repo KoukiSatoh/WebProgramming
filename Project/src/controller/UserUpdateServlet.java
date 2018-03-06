@@ -91,7 +91,6 @@ public class UserUpdateServlet extends HttpServlet {
 
 
 
-
 		//未入力があるかで分岐
 		if(name.equals("") || birthdate.equals("") ) {
 			request.setAttribute("errMsg", "入力された内容は正しくありません。");
