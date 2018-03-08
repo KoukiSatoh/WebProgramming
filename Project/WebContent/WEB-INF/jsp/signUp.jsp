@@ -45,7 +45,7 @@
             					<form class="form-horizontal" method="post" action="UserListServlet">
 
             						<div class="form-group">
-            							<label for="ID" class="cols-sm-2 control-label">UserID</label>
+            							<label for="ID" class="cols-sm-2 control-label">LoginID</label>
             							<div class="cols-sm-10">
             								<div class="input-group">
             									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
@@ -69,7 +69,7 @@
             							<div class="cols-sm-10">
             								<div class="input-group">
             									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+            									<input type="password" class="form-control" name="passConf" id="confirm"  placeholder="Confirm your Password"/>
             								</div>
             							</div>
             						</div>
@@ -80,7 +80,7 @@
                           <div class="cols-sm-10">
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                              <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                              <input type="text" class="form-control" name="name" id="username"  placeholder="Enter your Username"/>
                             </div>
                           </div>
                         </div>
@@ -91,7 +91,7 @@
             							<div class="cols-sm-10">
             								<div class="input-group">
             									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-            									<input type="date" class="form-control" name="email" id="email"  placeholder="Enter your Birthday"/>
+            									<input type="date" class="form-control" name="birthDate"   placeholder="Enter your Birthday"/>
             								</div>
             							</div>
             						</div>
@@ -117,5 +117,5 @@
   </html>
 
   <div style="margin-left:35%;margin-right:55%;">
-    <a href="UserListServlet">戻る</a>
+    <a href="javascript:history.back();">戻る</a>
   </div>

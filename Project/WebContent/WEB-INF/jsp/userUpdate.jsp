@@ -104,5 +104,5 @@
 
 
 <div style="margin-left:10%;margin-right:55%;">
-  <a href="UserListServlet">戻る</a>
+  <a href="javascript:history.back();">戻る</a>
 </div>

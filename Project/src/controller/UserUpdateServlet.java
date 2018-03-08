@@ -83,28 +83,33 @@ public class UserUpdateServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String birthdate = request.getParameter("birthdate");
 
-		//ユーザ情報保持　新しくインスタンスを作る
-
-
+		//ユーザ情報保持するために新しくインスタンスを作る
+	
 
 		//暗号化されたパスワードとパスワード（確認）を生成
 
 
 
-		//未入力があるかで分岐
+		//ユーザ名と生年月日に未入力があるかで分岐
 		if(name.equals("") || birthdate.equals("") ) {
-			request.setAttribute("errMsg", "入力された内容は正しくありません。");
+			request.setAttribute("errMsg", "入力された内容は正しくありません。");//未入力があったらエラーメッセージが表示される
+			//jspにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
 
-		// パスワードとパスワード確認が同じであるか、もし同じ時にパスワードは未入力であるかで分岐
-		if(!password.equals(passConf)) {
+		// パスワードとパスワード確認が同じであるか、もし同じ時にパスワードは未入力であるかで分岐させる
+		if(!password.equals(passConf)) {//passwordとpassConfが一致しないとエラーを出すよ
 			request.setAttribute("errMsg", "パスワードが一致しません。");
+			//jspにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
 			return;
+		}
+		if(password.equals("") && passConf.equals("")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
+			dispatcher.forward(request, response);
 		}
 
 

@@ -57,3 +57,8 @@ public class UserListServlet extends HttpServlet {
 	}
 
 }
+
+/**
+ * ユーザの画面には<c:if>を使うことで削除ボタンを表示にすることができるらしい
+ * 更新ボタンはidと一致したユーザのみ表示する削除ボタンは表示しない
+ */

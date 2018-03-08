@@ -18,7 +18,12 @@ public class Cryption {
 	 * @throws NoSuchAlgorithmException(例外)
 	 */
 
-	public static String encrypt(String source) throws NoSuchAlgorithmException{
+
+
+	public static String enPass(String password) throws NoSuchAlgorithmException{
+
+		//ハッシュを生成したい元の文字列
+		String source = "password";
 
 		//ハッシュ生成前にバイト配列に置き換える際のCharset
 		Charset charset = StandardCharsets.UTF_8;
