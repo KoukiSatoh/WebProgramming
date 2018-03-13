@@ -83,23 +83,25 @@
       <tbody>
        <c:forEach var="user" items="${userList}" >
              <!--forEach；繰り返し処理をする時に使う  items；ループする配列、または、コレクション var：itemから取り出した要素を格納する変数名 -->
-         <tr>
-           <td></td>
-           <td>${user.loginId}</td>
-           <td>${user.name}</td>
-           <td>${user.birthDate}</td>
-            <!-- TODO 未実装；ログインボタンの表示制御を行う -->
-           <td>
-             <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
-             <a class="btn btn-success" href="UserUpdateServlet?id=${user.id}">更新</a>
-             <a class="btn btn-danger" href ="UserDeleteServlet?id=${user.id}">削除</a>
-           </td>
-         </tr>
+             <tr>
+               <td></td>
+               <td>${user.loginId}</td>
+               <td>${user.name}</td>
+               <td>${user.birthDate}</td>
+                <!-- TODO 未実装；ログインボタンの表示制御を行う -->
+               <td>
+                 <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
+                 <a class="btn btn-success" href="UserUpdateServlet?id=${user.id}">更新</a>
+                 <a class="btn btn-danger" href ="UserDeleteServlet?id=${user.id}">削除</a>
+               </td>
+             </tr>
        </c:forEach>
      </tbody>
     </table>
   </div>
 </span>
+
+
 
 </body>
 </html>

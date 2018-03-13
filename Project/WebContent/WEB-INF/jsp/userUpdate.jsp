@@ -104,5 +104,6 @@
 
 
 <div style="margin-left:10%;margin-right:55%;">
-  <a href="javascript:history.back();">戻る</a>
+  <a href="">戻る</a>
+    <!-- 一つ前のページに戻る -->
 </div>

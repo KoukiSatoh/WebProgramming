@@ -3,119 +3,93 @@
 
 <!doctype html>
 <html lang="ja">
+<!-- headここから -->
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <body>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS 読み込み-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- オリジナルのCSS読み込み -->
+    <link rel="stylesheet" type="text/css" href="signUp.css">
+ 　<!-- javascriptの読み込み -->
+  <!--  <script type="text/javascript" src="assets/js/bootstrap.js"></script>-->
 
-    <title>ユーザ新規登録</title>
   </head>
-  <body>
+<!-- headここまで -->
 
-    <ul class="nav justify-content-end bg-dark">
-        <li class="nav-item">
-            <a class="nav-link" href="UserListServlet">
-            <font color="white">ユーザ名 さん</font>
+<!-- bodyここから -->
+   <!-- ナビバーここから -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand">
+        <p class="text-light bg-dark ">ユーザー新規登録</p><!--  テキストの色を明るい色に変えている（白） -->
+      </a>
+
+      <ul class="nav justify-content-end bg-dark">
+        <li class="nav-text">
+            <a class="nav-link" href="UserDetailServlet">
+            <font color="white">${userInfo.name} さん</font>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled" href="LogoutServlet">
+             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" >
+              <font color="red">ログアウト</font>
+             </button>
+           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="LogoutServlet">
-            <font color="red">ログアウト</font>
-            </a>
-        </li>
-    </ul>
+      </ul>
+
+  </nav><!-- ナビバーここまで -->
+
+  <div class="mx-auto" style="width: 200px;"><!-- 中央揃え  -->
 
 
+    <h1>
+    <p class="text-center">Sign Up</p>
+    </h1>
+
+        <div class="panel-body"><!-- パネルのボディここから -->
+          <form  action="SignUpServlet" method="post">　<!--フォームここから-->
+               <fieldset class="form-group"><!-- フォームのグールプ化ここから（範囲内を枠線で囲む） -->
+                　<!-- ログインID入力エリア -->
+                    <div class="form-group">
+                      <label>ログインID</label>
+                        <input type="text" class="form-control form-control-sm" name="name" placeholder="login Id" size="25" maxlength="8"required><br>
+                    </div>
+                  <!-- パスワード入力エリア -->
+                    <div class="form-group">
+                      <label>パスワード</label>
+                      <input type="password" class="form-control form-control-sm" name="encPass" placeholder="password" size="20" maxlength="8"required><br>
+                    </div>
+                  <!--　パスワード確認  -->
+                  　<div class="form-group">
+                      <label>パスワード(確認)</label>
+                      <input type="password"class="form-control form-control-sm" name="encPassConf" placeholder="password Confirm" size="25" maxlength="8" required><br>
+                    </div>
+                  <!-- ユーザ名入力エリア -->
+                    <div class="form-group">
+                      <label>ユーザ名</label>
+                      <input type="text" class="form-control form-control-sm" name="name" placeholder="User Name" size="25" maxlength="8" required><br>
+                    </div>
+                  <!-- 生年月日入力エリア -->
+                    <div class="form-group">
+                      <label>生年月日</label>
+                      <input type="date" class="form-control form-control-sm" placeholder="Berth Day" size = "25" maxlength="8" required><br>
+                    </div>
+
+                     <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+                </fieldset><!-- フォームのグールプ化ここまで -->
+          　  </form><!-- フォームここまで -->
+        　  </div>
+      	  </div>
 
 
-          <div class="mx-auto" style="width: 200px;">
+ </body><!-- bodyここまで -->
+</html>
 
-            		<div class="csontainer">
-            			<div class="row main">
-            				<div class="panel-heading">
-            	               <div class="panel-title text-center">
-            	               		<h1 class="title">Sign up</h1>
-            	               		<hr />
-            	               	</div>
-            	            </div>
-            				<div class="main-login main-center">
-            					<form class="form-horizontal" method="post" action="UserListServlet">
-
-            						<div class="form-group">
-            							<label for="ID" class="cols-sm-2 control-label">LoginID</label>
-            							<div class="cols-sm-10">
-            								<div class="input-group">
-            									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-            									<input type="text" class="form-control" ID="ID" id="ID"  placeholder="Enter your ID"/>
-            								</div>
-            							</div>
-            						</div>
-
-            						<div class="form-group">
-            							<label for="password" class="cols-sm-2 control-label">Password</label>
-            							<div class="cols-sm-10">
-            								<div class="input-group">
-            									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-            								</div>
-            							</div>
-            						</div>
-
-            						<div class="form-group">
-            							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-            							<div class="cols-sm-10">
-            								<div class="input-group">
-            									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            									<input type="password" class="form-control" name="passConf" id="confirm"  placeholder="Confirm your Password"/>
-            								</div>
-            							</div>
-            						</div>
-
-
-                        <div class="form-group">
-                          <label for="username" class="cols-sm-2 control-label">Username</label>
-                          <div class="cols-sm-10">
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                              <input type="text" class="form-control" name="name" id="username"  placeholder="Enter your Username"/>
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div class="form-group">
-            							<label for="email" class="cols-sm-2 control-label">Birthday</label>
-            							<div class="cols-sm-10">
-            								<div class="input-group">
-            									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-            									<input type="date" class="form-control" name="birthDate"   placeholder="Enter your Birthday"/>
-            								</div>
-            							</div>
-            						</div>
-
-
-            						<div class="form-group ">
-                          <a href="UserListServlet">
-            							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onClick="UserListServlet">Register</button>
-                          </a>
-            						</div>
-                        <div class="login-register">
-                        </div>
-
-            					</form>
-            				</div>
-            			</div>
-            		</div>
-
-            		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-          </div>
-
-    </body>
-  </html>
 
   <div style="margin-left:35%;margin-right:55%;">
-    <a href="javascript:history.back();">戻る</a>
+    <a href="">戻る</a>
+      <!-- 一つ前のページに戻る -->
   </div>

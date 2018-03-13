@@ -21,6 +21,7 @@
 <p class="text-center">
  <div class="modal-dialog">
 
+
   <c:if test="${errMsg != null}" >
     <div class="alert alert-danger" role="alert">
   ${errMsg}
