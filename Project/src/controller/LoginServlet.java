@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Cryption;
 import dao.UserDao;
 import model.User;
 
@@ -62,9 +63,12 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("login_id");
 		String password = request.getParameter("password");
 
+		//パスワードを暗号化する
+		 String encPass = Cryption.encryption(password);
+
 		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 		UserDao userDao = new UserDao();
-		User user = userDao.findByLoginInfo(loginId, password);
+		User user = userDao.findByLoginInfo(loginId, encPass);
 
 		/** テーブルに該当のデータが見つからなかった場合 **/
 		if (user == null) {

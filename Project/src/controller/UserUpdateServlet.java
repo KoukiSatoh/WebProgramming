@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Cryption;
 import dao.UserDao;
 import model.User;
 
@@ -73,7 +74,7 @@ public class UserUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 
-		//リクエストパラメータの文字コード指定
+		//リクエストパラメータの文字コード指定、セッション情報の文字化け対策
 		request.setCharacterEncoding("UTF-8");
 
 		//リクエストパラメータの取得（フォームに入力された内容）
@@ -82,17 +83,46 @@ public class UserUpdateServlet extends HttpServlet {
 		String passConf = request.getParameter("passConf");
 		String name = request.getParameter("name");
 		String birthdate = request.getParameter("birthdate");
-
-		//ユーザ情報保持するために新しくインスタンスを作る
-	
+		String loginID = request.getParameter("loginID");
 
 		//暗号化されたパスワードとパスワード（確認）を生成
+		 String encPass = Cryption.encryption(password);
+		 String encPassConf = Cryption.encryption(passConf);
+
+
+		//String型のidをint型に変換
+		int iId = Integer.parseInt(id);
+
+		//
+		/*try {
+
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+            datstr = sdFormat.parse("birthdate");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+	//現在時刻を取得して、String型にキャスト?
+
+		//Date String型に変換する?
+
+
+
+*/
+		//新しくDaoを作り、フォームに入力された情報を保持する
+				User user = new User(iId,loginID,name,birthdate);
+
 
 
 
 		//ユーザ名と生年月日に未入力があるかで分岐
 		if(name.equals("") || birthdate.equals("") ) {
 			request.setAttribute("errMsg", "入力された内容は正しくありません。");//未入力があったらエラーメッセージが表示される
+
+
+
 			//jspにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
@@ -100,21 +130,33 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 
 		// パスワードとパスワード確認が同じであるか、もし同じ時にパスワードは未入力であるかで分岐させる
-		if(!password.equals(passConf)) {//passwordとpassConfが一致しないとエラーを出すよ
+		if(!password.equals(passConf)) {//passwordとpassConfが一致しないとエラーを出す
 			request.setAttribute("errMsg", "パスワードが一致しません。");
+
+			//入力フォームに入力された値を保持する
+			 request.setAttribute("id", id);
+			 request.setAttribute("name", name);
+		    	 request.setAttribute("birthDate", birthdate);
+
 			//jspにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
 			return;
+
 		}
-		if(password.equals("") && passConf.equals("")) {
+
+		if(password.equals("") && passConf.equals("")) {//passwordとpassConfが未入力でも進む
+			//jspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userUpdate.jsp");
 			dispatcher.forward(request, response);
 		}
 
 
+		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 		UserDao userDao = new UserDao();
-		userDao.findByUpdate(password,name,birthdate,id);
+		userDao.findByUpdate(encPass,name,birthdate,id);
+
+
 
 		response.sendRedirect("UserListServlet");
 

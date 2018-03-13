@@ -18,10 +18,7 @@ public class Cryption {
 	 * @throws NoSuchAlgorithmException(例外)
 	 */
 
-
-
-	public static String enPass(String password) throws NoSuchAlgorithmException{
-
+	public static String encryption(String password) {
 		//ハッシュを生成したい元の文字列
 		String source = "password";
 

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Cryption;
+import dao.UserDao;
+
 /**
  * Servlet implementation class SiginUpServlet
  */
@@ -26,14 +29,14 @@ public class SiginUpServlet extends HttpServlet {
     }
 
 
-    /**
+    /*
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * @ユーザ新規登録
-	 * @ログインID
-	 * @パスワード
-	 * @パスワード確認
-	 * @ユーザ名
-	 * @生年月日
+	 * ユーザ新規登録
+	 * ログインID
+	 * パスワード
+	 * パスワード確認
+	 * ユーザ名
+	 * 生年月日
 	 */
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,18 +46,16 @@ public class SiginUpServlet extends HttpServlet {
 		//Httpsessionインスタンスの取得
 		HttpSession session = request.getSession();
 
-		//ログインセッションがある場合、ユーザ一覧画面にリダイレクト
-		if(session.getAttribute("userInfo") != null) {
-			 response.sendRedirect("UserListServlet");
+		//ログインセッションがない場合、ログイン画面にリダイレクト（ログアウト）
+		if(session.getAttribute("userInfo") == null) {
+			 response.sendRedirect("LoginServlet");
 			 return;
 		}
 
-		// login.jspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);
 
-		//サーブレットの動作を決める「action]の値をリクエストパラメータから取得する
-		//String action = request.getParameter("action");
+		//
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
@@ -62,25 +63,49 @@ public class SiginUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
-		//リクエストパラメータの文字コード指定
+		//リクエストパラメータの文字コード指定、セッション情報の文字化け対策
 		 request.setCharacterEncoding("UTF-8");
 
 		//リクエストパラメータの取得
-		
+		 String loginId  = request.getParameter("login_id");
+		 String password = request.getParameter("password");
+		 String passConf = request.getParameter("passConf");
+		 String 	  name   = request.getParameter("name");
+		 String birthDate = request.getParameter("birth_date");
+
 		 //パスワードを暗号化する
+		 String encPass = Cryption.encryption(password);
+		 String encPassConf = Cryption.encryption(passConf);
 
 
+		 //ちゃんと値を受け取れているかチェックする
+		 System.out.println(loginId);
+		 System.out.println(encPass);
+		 System.out.println(encPassConf);
+		 System.out.println(name);
+		 System.out.println(birthDate);
 
-		 //リクエストパラメータの値をDaoに渡す
+		 //リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
+		 UserDao userdao = new UserDao();
+		 boolean sigin = userdao.siginCheck(loginId,encPass,encPassConf,name,birthDate);
 
+	     //更新に失敗した場合は入力画面に戻り、成功した場合はユーザ一覧ページにリダイレクトする
 
+		 if(!sigin) {// 変数siginと違ったらエラーをだす
+			 request.setAttribute("errMsg","入力された内容は正しくありません");
 
+			 //入力フォームに入力された値を保持する
+			 request.setAttribute("loginId", loginId);
+			 request.setAttribute("name", name);
+		    	 request.setAttribute("birthDate", birthDate);
 
-		 //Daoの処理を条件に分岐(!Daoの時エラーみたいな)
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp");
+			dispatcher.forward(request, response);
 
+		 }else {
+			 //未入力やパスワードの不一致がなければ、UserListServletにリダイレクトさせる
+			  response.sendRedirect("UserListServlet");
 
-
-
-
+		}
 	}
 }

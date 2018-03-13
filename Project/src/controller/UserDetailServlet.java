@@ -43,10 +43,13 @@ public class UserDetailServlet extends HttpServlet {
         UserDao userDao = new UserDao();
 		User user = userDao.findByDetail(id);
 
+
+		 // TODO  未実装：ユーザ情報をリクエストスコープにセットしてjspにフォワード
+
+		//リクエストに新しい属性と値をセットする
         request.setAttribute("user", user);
 
-
-        // TODO  未実装：ユーザ情報をリクエストスコープにセットしてjspにフォワード
+        //jspにフォーワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDetails.jsp");
 		dispatcher.forward(request, response);
 
