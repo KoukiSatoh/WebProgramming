@@ -16,11 +16,14 @@ public class User {
 	private String create_Date;
 	private String update_Date;
 
+
 	// ログインセッションを保存するためのコンストラクタ
 	public User(String loginId, String name) {
 		this.login_Id = loginId;
 		this.name = name;
 	}
+
+
 
 	// 全てのデータをセットするコンストラクタ
 	public User(int id, String loginId, String name, Date birthDate, String password, String createDate,
@@ -33,6 +36,17 @@ public class User {
 		this.create_Date = createDate;
 		this.update_Date = updateDate;
 	}
+
+	//フォームに入力された情報を保持するためにデータをセットするコンストラクタを作る(UserUpdateServletで使用)
+	public User(int id, String loginId, String name, Date birthDate) {
+		this.id = id;
+		this.login_Id = loginId;
+		this.name = name;
+		this.birth_Date = birthDate;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
